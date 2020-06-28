@@ -1,0 +1,6 @@
+
+
+@mixin propColor ($key, $color) {
+    #{$key}: getColor($color);
+}
+

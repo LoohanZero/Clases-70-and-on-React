@@ -1,0 +1,6 @@
+@import "../mixins/sizes";
+
+*{
+    @include propSizes('margin', 'zero');
+    @include propSizes('padding', 'zero');
+}

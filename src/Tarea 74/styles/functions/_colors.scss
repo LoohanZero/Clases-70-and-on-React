@@ -1,0 +1,11 @@
+
+
+
+@function getColor($color) {
+    @if not map-has-key($colors, $color) {
+        @error '#{$color} does not exist'
+    };
+
+    @return map-get($colors, $color)
+};
+

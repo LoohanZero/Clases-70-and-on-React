@@ -1,0 +1,5 @@
+@import "../variables/_flex";
+
+@mixin flex ($key, $instruction) {
+    #{$key}: getFlexInfo($instruction);
+}

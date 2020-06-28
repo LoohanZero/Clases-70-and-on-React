@@ -1,0 +1,23 @@
+.searchContainer {
+    width: 85%;
+    position: relative;
+
+    .searchIcon {
+        position: absolute;
+        left: 45px;
+        top: calc(50% - 8px)
+    }
+}
+
+input {
+    border: none;
+    width: 90%;
+    margin: 40px;
+    padding: 12px 35px;
+    line-height: 16px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    border-radius: 20px;
+    outline: none;
+}
+

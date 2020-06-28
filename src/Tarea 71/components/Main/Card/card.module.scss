@@ -1,0 +1,44 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff;
+    height: 415px;
+    box-shadow: 13px 15px 41px -12px rgba(0,0,0,0.75);
+    
+    & > img {
+        width: 100%;
+
+    }
+}
+
+.cardTextContainer {
+    padding: 15px;
+    
+    h4 {
+        font-size: 19px;
+    }
+    p {
+        padding: 15px 0;
+        line-height: 20px;
+        font-size: 14px;
+        color: grey;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.404);
+    }
+}
+
+.users {
+    width: 50%;
+    position: relative;
+    height: 65px;
+}
+
+

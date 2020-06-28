@@ -1,0 +1,38 @@
+@import "../../styles/main.scss";
+
+// variant: primary, default, success, danger, info (default: default)
+.button {
+    border: none;
+    @include propSizes('height', 'forty');
+    @include propSizes('width', 'twofifty');
+    @include propColor('color', 'blackie');
+    @include propSizes('font-size', 'sixteen');
+}
+.rounded {
+   @include propSizes('border-radius', 'ten');
+}
+.primary {
+    @include propColor('background-color', 'primary');
+    @include propColor('color', 'blackie');
+
+}
+
+.default {
+    @include propColor('background-color', 'default');
+    @include propColor('color', 'blackie');
+}
+
+.danger {  
+    @include propColor('background-color', 'danger');
+    @include propColor('color', 'default');
+}
+
+.success {
+    @include propColor('background-color', 'success');
+    @include propColor('color', 'default');
+}
+
+.info {
+    @include propColor('background-color', 'info');
+    @include propColor('color', 'default');
+}

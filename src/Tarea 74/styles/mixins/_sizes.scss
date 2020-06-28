@@ -1,0 +1,5 @@
+
+
+@mixin propSizes ($key, $size) {
+    #{$key}: getSize($size);
+}

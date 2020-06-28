@@ -1,0 +1,12 @@
+.App {
+    display: flex;
+    height: 100vh; 
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+   
+}
+
+.notAsideContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

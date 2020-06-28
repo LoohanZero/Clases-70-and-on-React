@@ -1,0 +1,8 @@
+
+@function getSize($size) {
+    @if not map-has-key($sizes, $size) {
+        @error '#{$size} does not exist'
+    };
+
+    @return map-get($sizes, $size)
+};

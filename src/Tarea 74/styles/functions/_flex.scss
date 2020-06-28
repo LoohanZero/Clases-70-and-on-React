@@ -1,0 +1,9 @@
+@import "../variables/_flex";
+
+@function getFlexInfo($instruction) {
+    @if not map-has-key($flexoptions, $instruction) {
+        @error '#{$instruction} does not exist'
+    };
+
+    @return map-get($flexoptions, $instruction)
+};
