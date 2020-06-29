@@ -5,7 +5,7 @@ import styled from "styled-components";
 const StyledAside = styled.aside`
   display: flex;
   background-color: #393e46;
-  
+  height: 100%;
 `;
 
 const Aside = () => {

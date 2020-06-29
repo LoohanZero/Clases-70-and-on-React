@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import DisplayContext from "./contexts/DisplayContext";
 
 const StyledPokemonCard = styled.article`
   display: flex;
@@ -7,12 +8,13 @@ const StyledPokemonCard = styled.article`
   align-items: center;
   justify-content: space-evenly;
   height: 350px;
-  width: 270px;
+  width: ${(prop) => Math.ceil(65 / prop.columns)}%;
   background-color: white;
   border-radius: 15px;
   margin: 15px;
+  padding: 15px;
   color: #393e46;
-  box-shadow: 7px 7px 15px -11px rgba(0,0,0,0.67);
+  box-shadow: 7px 7px 15px -11px rgba(0, 0, 0, 0.67);
 `;
 
 const PokemonName = styled.h1`
@@ -51,22 +53,29 @@ const PokemonType = styled.li`
   background-color: #32e0c4;
 `;
 
-const PokemonCard = ({ id, num, name, img, type }) => {
+const PokemonCard = ({ pokemon }) => {
+  const { columnsDisplayed } = useContext(DisplayContext);
+
   return (
-    <StyledPokemonCard id={id}>
-      <TitleContainer>
-        <PokemonName>{name}</PokemonName>
-        <PokemonNumber>{num}</PokemonNumber>
-      </TitleContainer>
-      <Container>
-        <PokemonImg src={img} />
-      </Container>
-      <PokemonTypeList>
-        {type.map((types) => (
-          <PokemonType>{types}</PokemonType>
-        ))}
-      </PokemonTypeList>
-    </StyledPokemonCard>
+    <>
+      {columnsDisplayed && (
+        <StyledPokemonCard columns={columnsDisplayed}>
+          <TitleContainer>
+            <PokemonName>{pokemon.name}</PokemonName>
+            <PokemonNumber>{pokemon.nationalPokedexNumber}</PokemonNumber>
+          </TitleContainer>
+          <Container>
+            <PokemonImg src={pokemon.imageUrl} />
+          </Container>
+          <PokemonTypeList>
+            {pokemon.types &&
+              pokemon.types.map((type, index) => (
+                <PokemonType key={index}>{type}</PokemonType>
+              ))}
+          </PokemonTypeList>
+        </StyledPokemonCard>
+      )}
+    </>
   );
 };
 

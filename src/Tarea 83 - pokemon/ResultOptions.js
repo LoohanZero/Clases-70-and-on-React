@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import DisplayContext from "./contexts/DisplayContext";
 
 const Boton = styled.button`
-cursor: pointer; 
+  cursor: pointer;
   background-color: #32e0c4;
   color: #393e46;
   width: 200px;
@@ -14,14 +15,13 @@ cursor: pointer;
   outline: none;
 
   &:hover {
-      background-color: #51FFE3;
-      transition: 0.3s;
+    background-color: #51ffe3;
+    transition: 0.3s;
   }
   &:active {
-      background-color: #42f0d4;
-      transition: 0.3s;
+    background-color: #42f0d4;
+    transition: 0.3s;
   }
-
 `;
 
 const Container = styled.div`
@@ -32,11 +32,31 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Select = styled.select`
+  background-color: white;
+  color: #393e46;
+  width: 250px;
+  height: 50px;
+  border: 1px solid #393e46;
+  border-radius: 10px;
+  font-size: 18px;
+  padding-left: 15px;
+  outline: none;
+`;
+
+const Option = styled.option``;
+
 const ResultOptions = () => {
+  const { showThreeColumns, showFourColumns } = useContext(DisplayContext);
+
   return (
     <Container>
-      <Boton>Mostrar 3</Boton>
-      <Boton>Mostrar 4</Boton>
+      <Select>
+        <Option>Ordenar por Número</Option>
+        <Option>Ordenar por Nombre</Option>
+      </Select>
+      <Boton onClick={showThreeColumns}>Mostrar 3</Boton>
+      <Boton onClick={showFourColumns}>Mostrar 4</Boton>
     </Container>
   );
 };

@@ -1,22 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Filter from "./Filter";
-import data from "./data";
 import styled from "styled-components";
-
-const byTypes = (newArray, pokemon) => {
-  return [...newArray, ...pokemon.type];
-};
-
-const byType = (newArray, type) => {
-  if (!newArray.includes(type)) {
-    return [...newArray, type];
-  } else {
-    return [...newArray];
-  }
-};
+import PokemonContext from "./contexts/PokemonContext";
 
 const Container = styled.ul`
-margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -29,13 +17,13 @@ const StyledFilter = styled(Filter)`
 `;
 
 const Filters = () => {
+  const { pokemonTypes } = useContext(PokemonContext);
+
   return (
     <Container>
-      {data
-        .reduce(byTypes, [])
-        .reduce(byType, [])
-        .map((type) => (
-          <StyledFilter type={type} />
+      {pokemonTypes &&
+        pokemonTypes.map((type, index) => (
+          <StyledFilter key={index} type={type} />
         ))}
     </Container>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'Tarea 75/App';
+import App from './Tarea 83 - pokemon/App';
 
 // import * as serviceWorker from './serviceWorker';
 
