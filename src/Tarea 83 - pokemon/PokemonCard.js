@@ -58,7 +58,7 @@ const PokemonCard = ({ pokemon }) => {
 
   return (
     <>
-      {columnsDisplayed && (
+      {columnsDisplayed && pokemon.types && (
         <StyledPokemonCard columns={columnsDisplayed}>
           <TitleContainer>
             <PokemonName>{pokemon.name}</PokemonName>
@@ -68,8 +68,7 @@ const PokemonCard = ({ pokemon }) => {
             <PokemonImg src={pokemon.imageUrl} />
           </Container>
           <PokemonTypeList>
-            {pokemon.types &&
-              pokemon.types.map((type, index) => (
+            {pokemon.types.map((type, index) => (
                 <PokemonType key={index}>{type}</PokemonType>
               ))}
           </PokemonTypeList>

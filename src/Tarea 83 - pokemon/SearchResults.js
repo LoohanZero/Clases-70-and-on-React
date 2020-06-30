@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 import PokemonContext from "./contexts/PokemonContext";
 
-
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -29,10 +28,6 @@ const Page = styled.a`
 `;
 
 const SearchResults = () => {
-
-
-
-
   const {
     pokemonList,
     nextPage,
@@ -43,27 +38,34 @@ const SearchResults = () => {
   } = useContext(PokemonContext);
 
   return (
-    <MainContainer>
-      <Container>
-        <Page onClick={toFirstPage}>{"<<"}</Page>
-        <Page onClick={previousPage}>{"<"}</Page>
-        {currentPage !== 1 && <Page onClick={nextPage}>{currentPage - 1}</Page>}
-        <Page>{currentPage}</Page>
-        {currentPage !== 1 && <Page onClick={nextPage}>{currentPage + 1}</Page>}
-        <Page onClick={nextPage}>{">"}</Page>
-        <Page onClick={toLastPage}>{">>"}</Page>
-      </Container>
-      <Container>
-        {pokemonList &&
-          pokemonList.map((pokemon, index) =>
+    <>
+    {pokemonList && (
+      <MainContainer>
+        <Container>
+          <Page onClick={toFirstPage}>{"<<"}</Page>
+          <Page onClick={previousPage}>{"<"}</Page>
+          {currentPage !== 1 && (
+            <Page onClick={nextPage}>{currentPage - 1}</Page>
+          )}
+          <Page>{currentPage}</Page>
+          {currentPage !== 1 && (
+            <Page onClick={nextPage}>{currentPage + 1}</Page>
+          )}
+          <Page onClick={nextPage}>{">"}</Page>
+          <Page onClick={toLastPage}>{">>"}</Page>
+        </Container>
+        <Container>
+          {pokemonList.map((pokemon, index) =>
             pokemon.nationalPokedexNumber ? (
               <PokemonCard key={index} pokemon={pokemon} />
             ) : (
               ""
             )
           )}
-      </Container>
-    </MainContainer>
+        </Container>
+      </MainContainer>
+    )}
+    </>
   );
 };
 
