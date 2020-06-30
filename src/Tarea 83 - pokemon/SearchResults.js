@@ -44,13 +44,7 @@ const SearchResults = () => {
         <Container>
           <Page onClick={toFirstPage}>{"<<"}</Page>
           <Page onClick={previousPage}>{"<"}</Page>
-          {currentPage !== 1 && (
-            <Page onClick={nextPage}>{currentPage - 1}</Page>
-          )}
           <Page>{currentPage}</Page>
-          {currentPage !== 1 && (
-            <Page onClick={nextPage}>{currentPage + 1}</Page>
-          )}
           <Page onClick={nextPage}>{">"}</Page>
           <Page onClick={toLastPage}>{">>"}</Page>
         </Container>
