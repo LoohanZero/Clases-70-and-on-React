@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterPage from "./pages/CharacterPage";
-import ComicsPage from "./ComicsPage";
-import ComicPage from "./ComicPage"
+import ComicsPage from "./pages/ComicsPage";
+import ComicPage from "./pages/ComicPage";
 
 const GlobalStyle = createGlobalStyle`
 * {

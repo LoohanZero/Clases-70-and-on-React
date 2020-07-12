@@ -8,7 +8,7 @@ const Container = styled.article`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin: 15px;
+  margin: 25px;
   width: 225px;
   height: 500px;
 
