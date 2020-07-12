@@ -30,12 +30,6 @@ const CharactersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { search } = useLocation();
 
-  let apikey = "?apikey=0e10884938787c40366929ce9fde20f4";
-
-  if (search) {
-    apikey = "";
-  }
-
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
@@ -43,7 +37,8 @@ const CharactersPage = () => {
     const getCharacters = async () => {
       try {
         const response = await fetch(
-          `https://gateway.marvel.com/v1/public/characters${apikey}${search}&limit=18`
+          `https://gateway.marvel.com/v1/public/characters${
+            search ? search : "?apikey=0e10884938787c40366929ce9fde20f4"}&limit=18`
         );
         const data = await response.json();
         setCharacters(data.data.results);
@@ -55,8 +50,8 @@ const CharactersPage = () => {
       }
     };
     getCharacters();
-  }, [apikey, search]);
- 
+  }, [search]);
+
   return (
     <>
       {isLoading && (
@@ -65,7 +60,14 @@ const CharactersPage = () => {
         </LoadingContainer>
       )}
       <Container>
-        {!isLoading && <PageSelector currentPage={currentPage} setCurrentPage={setCurrentPage} limit={18} totalCount={totalCount} />}
+        {!isLoading && (
+          <PageSelector
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            limit={18}
+            totalCount={totalCount}
+          />
+        )}
         {!isLoading &&
           characters.map((character) => (
             <Card key={character.id} character={character} />

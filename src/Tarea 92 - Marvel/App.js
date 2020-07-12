@@ -1,6 +1,11 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Header from "./components/Header";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterPage from "./pages/CharacterPage";
@@ -35,7 +40,7 @@ const App = () => {
 
           <Switch>
             <Route exact path="/">
-              <CharactersPage />
+              <Redirect to="/characters" />
             </Route>
             <Route exact path="/characters">
               <CharactersPage />
@@ -44,10 +49,10 @@ const App = () => {
               <CharacterPage />
             </Route>
             <Route exact path="/comics">
-            <ComicsPage />
+              <ComicsPage />
             </Route>
             <Route exact path="/comics/:id">
-            <ComicPage />
+              <ComicPage />
             </Route>
             <Route>
               <h1>Not Found</h1>

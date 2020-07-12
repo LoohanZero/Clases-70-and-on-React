@@ -29,21 +29,16 @@ const ComicsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { search } = useLocation();
 
-  let apikey = "?apikey=0e10884938787c40366929ce9fde20f4"
-
-  if(search) {
-    apikey = "";
-  }
-
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
 
     const getComics = async () => {
-     
       try {
         const response = await fetch(
-          `https://gateway.marvel.com/v1/public/comics${apikey}${search}`
+          `https://gateway.marvel.com/v1/public/comics${
+            search ? search : "?apikey=0e10884938787c40366929ce9fde20f4"
+          }`
         );
         const data = await response.json();
         setComics(data.data.results);
@@ -55,7 +50,7 @@ const ComicsPage = () => {
       }
     };
     getComics();
-  }, [apikey, search]);
+  }, [search]);
 
   return (
     <>
@@ -65,7 +60,14 @@ const ComicsPage = () => {
         </LoadingContainer>
       )}
       <Container>
-        {!isLoading && <PageSelector currentPage={currentPage} setCurrentPage={setCurrentPage} limit={20} totalCount={totalCount} />}
+        {!isLoading && (
+          <PageSelector
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            limit={20}
+            totalCount={totalCount}
+          />
+        )}
         {!isLoading &&
           comics.map((comic) => <Card key={comic.id} comic={comic} />)}
       </Container>

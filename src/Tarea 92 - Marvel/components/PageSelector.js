@@ -47,66 +47,65 @@ const PageSelector = ({ currentPage, setCurrentPage, limit, totalCount }) => {
 
   const previousPage = () => {
     const searchParams = new URLSearchParams(search);
-    const offset = (limit*currentPage) - (limit*2);
-    console.log(offset)
+    const offset = limit * currentPage - limit * 2;
+    console.log(offset);
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
     searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
     const newUrl = `${pathname}?${searchParams.toString()}`;
-  
-    setCurrentPage(currentPage - 1)
+
+    setCurrentPage(currentPage - 1);
     history.push(newUrl);
 
     if (currentPage === 1) {
-      toLastPage()
+      toLastPage();
     }
   };
 
   const toFirstPage = () => {
     const searchParams = new URLSearchParams(search);
     const offset = 0;
-  
+
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
     searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
     const newUrl = `${pathname}?${searchParams.toString()}`;
-   
-    history.push(newUrl);
-    setCurrentPage(1)
-  }
 
+    history.push(newUrl);
+    setCurrentPage(1);
+  };
 
   const toNextPage = () => {
     const searchParams = new URLSearchParams(search);
-    const offset = limit*currentPage;
-  
+    const offset = limit * currentPage;
+
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
     searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
     const newUrl = `${pathname}?${searchParams.toString()}`;
-  
-    setCurrentPage(currentPage + 1)
+
+    setCurrentPage(currentPage + 1);
     history.push(newUrl);
 
     if (currentPage === maxPage) {
-      toFirstPage()
+      toFirstPage();
     }
-  }
+  };
 
   const toLastPage = () => {
     const searchParams = new URLSearchParams(search);
     const offset = totalCount - limit;
-    console.log(totalCount)
-    console.log(offset)
-    console.log(maxPage)
+    console.log(totalCount);
+    console.log(offset);
+    console.log(maxPage);
 
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
     searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
     const newUrl = `${pathname}?${searchParams.toString()}`;
-   
+
     history.push(newUrl);
-    setCurrentPage(maxPage)
+    setCurrentPage(maxPage);
   };
 
   return (
