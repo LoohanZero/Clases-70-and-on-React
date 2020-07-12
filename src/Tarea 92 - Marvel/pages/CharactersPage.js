@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 import styled from "styled-components";
 import Card from "../components/CharactersCard";
@@ -26,6 +27,14 @@ const CharactersPage = () => {
   const [totalCount, setTotalCount] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { search } = useLocation();
+
+  let apikey = "?apikey=0e10884938787c40366929ce9fde20f4";
+
+  if (search) {
+    apikey = "";
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +43,7 @@ const CharactersPage = () => {
     const getCharacters = async () => {
       try {
         const response = await fetch(
-          "https://gateway.marvel.com/v1/public/characters?limit=18&apikey=0e10884938787c40366929ce9fde20f4"
+          `https://gateway.marvel.com/v1/public/characters${apikey}${search}&limit=18`
         );
         const data = await response.json();
         setCharacters(data.data.results);
@@ -46,8 +55,8 @@ const CharactersPage = () => {
       }
     };
     getCharacters();
-  }, []);
-
+  }, [apikey, search]);
+ 
   return (
     <>
       {isLoading && (
@@ -56,7 +65,7 @@ const CharactersPage = () => {
         </LoadingContainer>
       )}
       <Container>
-        {!isLoading && <PageSelector limit={18} totalCount={totalCount} />}
+        {!isLoading && <PageSelector currentPage={currentPage} setCurrentPage={setCurrentPage} limit={18} totalCount={totalCount} />}
         {!isLoading &&
           characters.map((character) => (
             <Card key={character.id} character={character} />

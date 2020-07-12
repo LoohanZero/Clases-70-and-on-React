@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import React from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -40,51 +40,80 @@ const Page = styled.a`
   }
 `;
 
-const PageSelector = ({ maxPage, limit, totalCount }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const PageSelector = ({ currentPage, setCurrentPage, limit, totalCount }) => {
   const history = useHistory();
   const { pathname, search } = useLocation();
-  const aVer = useLocation()
+  const maxPage = Math.ceil(totalCount / limit);
 
   const previousPage = () => {
-    history.goBack();
+    const searchParams = new URLSearchParams(search);
+    const offset = (limit*currentPage) - (limit*2);
+    console.log(offset)
+    searchParams.set("offset", offset);
+    searchParams.set("limit", limit);
+    searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
+    const newUrl = `${pathname}?${searchParams.toString()}`;
+  
+    setCurrentPage(currentPage - 1)
+    history.push(newUrl);
+
+    if (currentPage === 1) {
+      toLastPage()
+    }
   };
 
-  console.log(aVer)
+  const toFirstPage = () => {
+    const searchParams = new URLSearchParams(search);
+    const offset = 0;
+  
+    searchParams.set("offset", offset);
+    searchParams.set("limit", limit);
+    searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
+    const newUrl = `${pathname}?${searchParams.toString()}`;
+   
+    history.push(newUrl);
+    setCurrentPage(1)
+  }
+
 
   const toNextPage = () => {
     const searchParams = new URLSearchParams(search);
     const offset = limit*currentPage;
-    console.log(offset)
+  
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
-
-
-    const newUrl = `${pathname}?${searchParams.toString()}&apikey=0e10884938787c40366929ce9fde20f4`;
-    console.log(newUrl);
-
-
-    history.push(newUrl);
+    searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
+    const newUrl = `${pathname}?${searchParams.toString()}`;
+  
     setCurrentPage(currentPage + 1)
+    history.push(newUrl);
 
+    if (currentPage === maxPage) {
+      toFirstPage()
+    }
   }
 
   const toLastPage = () => {
     const searchParams = new URLSearchParams(search);
-    const offset = totalCount - 18;
+    const offset = totalCount - limit;
+    console.log(totalCount)
     console.log(offset)
+    console.log(maxPage)
+
     searchParams.set("offset", offset);
     searchParams.set("limit", limit);
-    const newUrl = `${pathname}?${searchParams.toString()}&apikey=0e10884938787c40366929ce9fde20f4`;
-    console.log(newUrl);
+    searchParams.set("apikey", "0e10884938787c40366929ce9fde20f4");
+    const newUrl = `${pathname}?${searchParams.toString()}`;
+   
     history.push(newUrl);
+    setCurrentPage(maxPage)
   };
 
   return (
     <Container>
-      <Page>{"<<"}</Page>
+      <Page onClick={toFirstPage}>{"<<"}</Page>
       <Page onClick={previousPage}>{"<"}</Page>
-      <Page to="">{currentPage}</Page>
+      <Page>{currentPage}</Page>
       <Page onClick={toNextPage}>{">"}</Page>
       <Page onClick={toLastPage}>{">>"}</Page>
     </Container>
