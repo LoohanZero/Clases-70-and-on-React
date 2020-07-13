@@ -8,7 +8,7 @@ const MainContainer = styled.div``;
 
 const BackgroundImage = styled.div`
   position: absolute;
-  height: 90%;
+  height: 80%;
   width: 100%;
   opacity: 0.2;
   background-image: url(${(props) => props.backgroundImg});
@@ -22,22 +22,19 @@ const Container = styled.article`
   align-items: flex-start;
   height: 100%;
   background-color: #000000;
-  padding: 40px 0 54px 0;
-  margin-bottom: -85px;
+  padding: 40px 0 15px 0;
   box-sizing: border-box;
 `;
 
-const NoCharactersContainer = styled.div`
-  height: 150px;
-`;
 
 const DetailsContainer = styled.div`
   padding: 0 0 5px 50px;
   width: 50%;
+  min-height: calc(100vh - 215px);
 `;
 
 const Image = styled.img`
-  height: 550px;
+  height: 500px;
 `;
 
 const Title = styled.h1`
@@ -145,17 +142,13 @@ const ComicPage = () => {
                   </>
                 )}
 
-                {comic.characters.available > 0 ? (
+                {comic.characters.available > 0 && (
                   <>
                     <Subtitle>Characters</Subtitle>
                     {comic.characters.available > 0 &&
                       comic.characters.items.map((creator, index) => (
                         <GenericText key={index}>{creator.name}</GenericText>
                       ))}
-                  </>
-                ) : (
-                  <>
-                    <NoCharactersContainer></NoCharactersContainer>
                   </>
                 )}
               </DetailsContainer>

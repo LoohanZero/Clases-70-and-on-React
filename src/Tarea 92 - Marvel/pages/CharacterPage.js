@@ -15,21 +15,16 @@ const Container = styled.article`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-start;
-  padding: 0 50px 22px 50px;
+  padding: 0 50px;
   width: 50%;
   color: #202020;
   background-color: #c0c0c0;
   border-left: 4px solid #e62429;
+  min-height: calc(100vh - 150px);
 `;
 
-const NoInfoContainer = styled(InfoContainer)`
-  height: calc(100vh - 110px);
-  padding-bottom: 0px;
-  display: flex;
-  justify-content: flex-start;
-`;
 
 const DetailsContainer = styled.div``;
 
@@ -105,49 +100,9 @@ const CharacterPage = () => {
               src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
             />
           </ImageContainer>
-
-          {character.comics.items.length > 0 &&
-          character.series.items.length > 0 &&
-          character.stories.items.length > 0 ? (
             <InfoContainer>
               <Name>{character.name}</Name>
-              {character.description && (
-                <Description>{character.description}</Description>
-              )}
-              <DetailsContainer>
-                <InfoTitle>Comics</InfoTitle>
-                <List>
-                  {character.comics.items.map((comic, index) => (
-                    <ListItem key={index} url={comic.resourseURI}>
-                      {comic.name}
-                    </ListItem>
-                  ))}
-                </List>
-              </DetailsContainer>
-              <DetailsContainer>
-                <InfoTitle>Series</InfoTitle>
-                <List>
-                  {character.series.items.map((series, index) => (
-                    <ListItem style={{ cursor: "default" }} key={index}>
-                      {series.name}
-                    </ListItem>
-                  ))}
-                </List>
-              </DetailsContainer>
-              <DetailsContainer>
-                <InfoTitle>Stories</InfoTitle>
-                <List>
-                  {character.stories.items.map((stories, index) => (
-                    <ListItem style={{ cursor: "default" }} key={index}>
-                      {stories.name}
-                    </ListItem>
-                  ))}
-                </List>
-              </DetailsContainer>
-            </InfoContainer>
-          ) : (
-            <NoInfoContainer>
-              <Name>{character.name}</Name>
+
               {character.description && (
                 <Description>{character.description}</Description>
               )}
@@ -196,8 +151,7 @@ const CharacterPage = () => {
                   </DetailsContainer>
                 </>
               )}
-            </NoInfoContainer>
-          )}
+            </InfoContainer>
         </Container>
       )}
       ;

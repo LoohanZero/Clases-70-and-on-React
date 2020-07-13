@@ -7,10 +7,12 @@ import {
   Redirect,
 } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterPage from "./pages/CharacterPage";
 import ComicsPage from "./pages/ComicsPage";
 import ComicPage from "./pages/ComicPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -27,7 +29,8 @@ body {
   
 }
 `;
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+`;
 
 const App = () => {
   return (
@@ -55,9 +58,10 @@ const App = () => {
               <ComicPage />
             </Route>
             <Route>
-              <h1>Not Found</h1>
+              <ErrorPage text="Page Not Found" />
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </MainContainer>
     </>

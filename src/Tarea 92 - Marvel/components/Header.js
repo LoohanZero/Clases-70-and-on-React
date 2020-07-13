@@ -16,7 +16,7 @@ const Nav = styled.nav`
 `;
 
 const StyledNavLink = styled(NavLink)`
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
     padding: 20px; 
     text-transform: uppercase;

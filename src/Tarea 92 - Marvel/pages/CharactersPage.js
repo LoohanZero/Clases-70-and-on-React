@@ -4,6 +4,7 @@ import { RingLoader } from "react-spinners";
 import styled from "styled-components";
 import Card from "../components/CharactersCard";
 import PageSelector from "../components/PageSelector";
+import ErrorPage from "./ErrorPage"
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Container = styled.div`
   padding-bottom: 25px;
 `;
 
-const LoadingContainer = styled(Container)`
+const LoadingErrorContainer = styled(Container)`
   display: flex;
   flex-wrap: none;
   justify-content: center;
@@ -28,6 +29,7 @@ const CharactersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState()
   const { search } = useLocation();
 
   useEffect(() => {
@@ -38,13 +40,16 @@ const CharactersPage = () => {
       try {
         const response = await fetch(
           `https://gateway.marvel.com/v1/public/characters${
-            search ? search : "?apikey=0e10884938787c40366929ce9fde20f4"}&limit=18`
+            search ? search : "?apikey=0e10884938787c40366929ce9fde20f4"
+          }&limit=18`
         );
         const data = await response.json();
         setCharacters(data.data.results);
         setTotalCount(data.data.total);
         setIsLoading(false);
       } catch (error) {
+        const errorInfo = new Error(error)
+        setError(errorInfo.message)
         setIsError(true);
         setIsLoading(false);
       }
@@ -52,15 +57,17 @@ const CharactersPage = () => {
     getCharacters();
   }, [search]);
 
+  console.log(error)
+
   return (
     <>
       {isLoading && (
-        <LoadingContainer>
+        <LoadingErrorContainer>
           <RingLoader css="override" size="100" />
-        </LoadingContainer>
+        </LoadingErrorContainer>
       )}
       <Container>
-        {!isLoading && (
+        {!isLoading && !isError && (
           <PageSelector
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
@@ -69,10 +76,16 @@ const CharactersPage = () => {
           />
         )}
         {!isLoading &&
+          !isError &&
           characters.map((character) => (
             <Card key={character.id} character={character} />
           ))}
       </Container>
+      {isError && (
+        <LoadingErrorContainer>
+          <ErrorPage text={error} />
+        </LoadingErrorContainer>
+      )}
     </>
   );
 };

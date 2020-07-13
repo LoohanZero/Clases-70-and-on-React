@@ -4,15 +4,17 @@ import styled from "styled-components";
 import Card from "../components/ComicsCard";
 import PageSelector from "../components/PageSelector";
 import { useLocation } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 const Container = styled.div`
+  width: 100vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   background-color: #c0c0c0;
-  padding: 0 50px;
+
 `;
-const LoadingContainer = styled(Container)`
+const LoadingErrorContainer = styled(Container)`
   display: flex;
   flex-wrap: none;
   justify-content: center;
@@ -27,6 +29,7 @@ const ComicsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState();
   const { search } = useLocation();
 
   useEffect(() => {
@@ -45,6 +48,8 @@ const ComicsPage = () => {
         setTotalCount(data.data.total);
         setIsLoading(false);
       } catch (error) {
+        const errorInfo = new Error(error);
+        setError(errorInfo.message);
         setIsError(true);
         setIsLoading(false);
       }
@@ -55,12 +60,12 @@ const ComicsPage = () => {
   return (
     <>
       {isLoading && (
-        <LoadingContainer>
+        <LoadingErrorContainer>
           <RingLoader css="override" size="100" />
-        </LoadingContainer>
+        </LoadingErrorContainer>
       )}
       <Container>
-        {!isLoading && (
+        {!isLoading && !isError && (
           <PageSelector
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
@@ -71,6 +76,11 @@ const ComicsPage = () => {
         {!isLoading &&
           comics.map((comic) => <Card key={comic.id} comic={comic} />)}
       </Container>
+      {isError && (
+        <LoadingErrorContainer>
+          <ErrorPage text={error} />
+        </LoadingErrorContainer>
+      )}
     </>
   );
 };
