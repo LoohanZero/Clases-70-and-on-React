@@ -79,7 +79,7 @@ const ComicPage = () => {
       setComic(data.data.results[0]);
       setPublishedDate(data.data.results[0].dates[0].date);
       setDescription(data.data.results[0].description);
-      console.log(data.data.results[0].description);
+
     };
     getComic();
   }, [id]);
