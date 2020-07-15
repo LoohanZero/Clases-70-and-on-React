@@ -33,25 +33,23 @@ const Footer = () => {
       );
       const data = await response.json();
       setFooterInfo(data);
-      console.log(data);
     };
     getFooterInfo();
   }, []);
 
   const getHREFInfo = () => {
     const link = footerInfo.attributionHTML.split('"');
-    console.log(link);
 
     return `${link[1]}`;
   };
 
   return (
     <>
-      {footerInfo && 
+      {footerInfo && (
         <StyledFooter>
           <Text href={getHREFInfo()}>{footerInfo.attributionText}</Text>
         </StyledFooter>
-      }
+      )}
     </>
   );
 };

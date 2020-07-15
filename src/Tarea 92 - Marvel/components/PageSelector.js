@@ -45,6 +45,10 @@ const PageSelector = ({ currentPage, setCurrentPage, limit, totalCount }) => {
   const { pathname, search } = useLocation();
   const maxPage = Math.ceil(totalCount / limit);
 
+
+
+ 
+
   const previousPage = () => {
     const searchParams = new URLSearchParams(search);
     const offset = limit * currentPage - limit * 2;
