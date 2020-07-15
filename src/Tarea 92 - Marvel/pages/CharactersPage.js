@@ -46,7 +46,7 @@ const CharactersPage = () => {
         const data = await response.json();
         setCharacters(data.data.results);
         setTotalCount(data.data.total);
-        search && setCurrentPage((data.data.offset / data.data.limit) + 1);
+        search && setCurrentPage(Math.ceil((data.data.offset / data.data.limit) + 1));
         setIsLoading(false);
       } catch (error) {
         const errorInfo = new Error(error)
