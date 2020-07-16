@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Tarea 92 - Marvel/App';
+import App from './Clase 93/App';
 
 // import * as serviceWorker from './serviceWorker';
 
